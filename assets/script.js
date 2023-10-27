@@ -2,7 +2,22 @@ let startBtn = document.getElementById('start');
 let startPage = document.getElementById('firstPage');
 let promptPageEl = document.getElementById('prompt-page');
 console.log(promptPageEl);
-
+function criteria() {
+    console.log('criteria function');
+    let getInputElValue = parseInt(
+        document.getElementById('lengthValue').value
+    );
+    console.log(getInputElValue);
+    if (isNaN(getInputElValue)) {
+        alert('Please type Number!!');
+        document.getElementById('lengthValue').value = '';
+    } else if (getInputElValue < 8 || getInputElValue > 128) {
+        alert('Please type a number between 8 - 128');
+        document.getElementById('lengthValue').value = '';
+    } else {
+        console.log('False');
+    }
+}
 function askForLength() {
     let box = document.createElement('div');
     box.classList.add('lengthSection');
@@ -17,6 +32,7 @@ function askForLength() {
     box.appendChild(inputElement);
     let submitLengthButton = document.createElement('button');
     submitLengthButton.textContent = 'Enter';
+    submitLengthButton.addEventListener('click', criteria);
     box.appendChild(submitLengthButton);
     promptPageEl.appendChild(box);
 }
