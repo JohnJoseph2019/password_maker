@@ -1,13 +1,12 @@
 let startBtn = document.getElementById('start');
 let startPage = document.getElementById('firstPage');
 let promptPageEl = document.getElementById('prompt-page');
-console.log(promptPageEl);
+let getInputElValue;
+
+function nextOption() {}
 function criteria() {
-    console.log('criteria function');
-    let getInputElValue = parseInt(
-        document.getElementById('lengthValue').value
-    );
-    console.log(getInputElValue);
+    getInputElValue = parseInt(document.getElementById('lengthValue').value);
+    // console.log(getInputElValue);
     if (isNaN(getInputElValue)) {
         alert('Please type Number!!');
         document.getElementById('lengthValue').value = '';
@@ -15,26 +14,42 @@ function criteria() {
         alert('Please type a number between 8 - 128');
         document.getElementById('lengthValue').value = '';
     } else {
-        console.log('False');
+        //Ask for criteria
+        promptPageEl.innerHTML = '';
+        promptPageEl.style.width = '750px';
+        let criteriaQuestion = document.createElement('h2');
+        criteriaQuestion.textContent =
+            'Do you want to have UPPERCASE Letters in your password ?';
+        promptPageEl.appendChild(criteriaQuestion);
+        let yesButton = document.createElement('button');
+        yesButton.textContent = 'YES';
+        let noButton = document.createElement('button');
+        noButton.textContent = 'NO';
+        noButton.classList.add('btn');
+        yesButton.classList.add('btn');
+        promptPageEl.appendChild(yesButton);
+        promptPageEl.appendChild(noButton);
+        noButton.addEventListener('click', (e) => nextOption(e));
+        yesButton.addEventListener('click', (e) => nextOption(e));
     }
 }
 function askForLength() {
-    let box = document.createElement('div');
-    box.classList.add('lengthSection');
+    // let box = document.createElement('div');
+    promptPageEl.classList.add('lengthSection');
     let questionEL = document.createElement('h2');
     questionEL.textContent = 'What is the length of you password ?';
-    box.appendChild(questionEL);
+    promptPageEl.appendChild(questionEL);
     let inputElement = document.createElement('input');
     inputElement.setAttribute('type', 'text');
     inputElement.setAttribute('placeholder', '4');
     inputElement.setAttribute('id', 'lengthValue');
     inputElement.classList.add('inputEl');
-    box.appendChild(inputElement);
+    promptPageEl.appendChild(inputElement);
     let submitLengthButton = document.createElement('button');
     submitLengthButton.textContent = 'Enter';
     submitLengthButton.addEventListener('click', criteria);
-    box.appendChild(submitLengthButton);
-    promptPageEl.appendChild(box);
+    promptPageEl.appendChild(submitLengthButton);
+    // promptPageEl.appendChild(box);
 }
 function begin() {
     //hide the first page
