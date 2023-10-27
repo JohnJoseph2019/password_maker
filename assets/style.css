@@ -27,3 +27,9 @@
 .inputEl {
     width: 75px;
 }
+.btn {
+    margin: 10px;
+    border-radius: 10px;
+    width: 75px;
+    height: 30px;
+}
