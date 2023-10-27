@@ -1,9 +1,94 @@
 let startBtn = document.getElementById('start');
 let startPage = document.getElementById('firstPage');
 let promptPageEl = document.getElementById('prompt-page');
+let finalPage = document.getElementById('final-Page');
+let passwordEl = document.getElementById('password');
 let getInputElValue;
 let criteriaIndex = 0;
-let charactersList = {};
+let charactersList = {
+    UPPERCASE: [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+    ],
+    LOWERCASE: [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z',
+    ],
+    NUMBERS: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    SPECIALCHARACTERS: [
+        '@',
+        '%',
+        '+',
+        '\\',
+        '/',
+        "'",
+        '!',
+        '#',
+        '$',
+        '^',
+        '?',
+        ':',
+        ',',
+        ')',
+        '(',
+        '}',
+        '{',
+        ']',
+        '[',
+        '~',
+        '-',
+        '_',
+        '.',
+    ],
+};
 
 let criteriaList = [
     {
@@ -20,20 +105,28 @@ let criteriaList = [
     },
     {
         q: 'Do you want to have SPECIAL-CHARACTERS Letters in your password ?',
-        id: 'SPECIAL-CHARACTERS',
+        id: 'SPECIALCHARACTERS',
     },
 ];
-
+let acceptedList = [];
+function generatePassword() {
+    promptPageEl.innerHTML = '';
+    promptPageEl.classList.add('hide');
+    finalPage.classList.remove('hide');
+    finalPage.classList.add('page');
+}
 function nextOption(e) {
     console.log(e.target.innerHTML);
     if (e.target.innerHTML === 'YES') {
         console.log('YES I WANT');
-    } else {
-        console.log('NO I DO WANT');
+        // console.log(charactersList[criteriaList[criteriaIndex].id]);
+        acceptedList = acceptedList.concat(
+            charactersList[criteriaList[criteriaIndex].id]
+        );
     }
-
+    console.log(acceptedList);
     if (criteriaIndex >= criteriaList.length - 1) {
-        console.log('Stop the criteria list');
+        generatePassword();
     } else {
         criteriaIndex++;
         askCriteria();
@@ -44,6 +137,7 @@ function askCriteria() {
     promptPageEl.style.width = '750px';
     promptPageEl.style.height = 'fit-content';
     let criteriaQuestion = document.createElement('h2');
+    criteriaQuestion.dataset.id = criteriaList[criteriaIndex].id;
     criteriaQuestion.textContent = criteriaList[criteriaIndex].q;
     promptPageEl.appendChild(criteriaQuestion);
     let yesButton = document.createElement('button');
@@ -95,6 +189,7 @@ function begin() {
     //hide the first page
     startPage.classList.add('hide');
     criteriaIndex = 0;
+    acceptedList = [];
     askForLength();
 }
 
