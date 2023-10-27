@@ -1,7 +1,29 @@
 .page {
+    padding-top: 15px;
+    padding-bottom: 15px;
     text-align: center;
+    margin: 250px auto;
+    background-color: blueviolet;
+    width: fit-content;
+    width: 600px;
+    height: 150px;
 }
 
 .hide {
     display: none;
+}
+.promptPage {
+    text-align: center;
+}
+.lengthSection {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: antiquewhite;
+    width: 500px;
+    height: 100px;
+    margin: 250px auto;
+}
+
+.inputEl {
+    width: 75px;
 }
